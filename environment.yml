@@ -1,0 +1,14 @@
+name: car_vision
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.9
+  - pip=25.0
+  - pandas
+  - matplotlib
+  - seaborn
+  - ipykernel
+  - jupyter
+  - scikit-learn
+  - mlflow
