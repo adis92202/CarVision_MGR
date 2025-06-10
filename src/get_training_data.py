@@ -20,14 +20,27 @@ def extract_and_save_frames(json_data: dict, video_path: str, output_dir: str):
     fps = cap.get(cv2.CAP_PROP_FPS)
 
     metadata = json_data["metadata"]
-    # fname = json_data["file"]["1"]["fname"]
-    ix = 1
+    base_json_filename = os.path.splitext(
+        os.path.basename(json_data["file"]["1"]["fname"])
+    )[0]
+
+    # Słownik do liczenia indexu dla każdej sekundy
+    timestamp_counter = {}
 
     for key, entry in metadata.items():
         timestamp = entry["z"][0]  # sekunda
+
+        # Liczymy index w tej sekundzie
+        timestamp_key = f"{timestamp:.3f}"
+        index = timestamp_counter.get(timestamp_key, 0)
+        timestamp_counter[timestamp_key] = index + 1
+
+        # Zamiana kropki na 'd'
+        timestamp_str = str(timestamp).replace(".", "d")
+
         x, y, w, h = entry["xy"][1:]
-        x1, y1 = int(x), int(y)
-        x2, y2 = int(x + w), int(y + h)
+        x1, y1 = int(round(x)), int(round(y))
+        x2, y2 = int(round(x + w)), int(round(y + h))
 
         frame_number = int(timestamp * fps)
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
@@ -38,9 +51,9 @@ def extract_and_save_frames(json_data: dict, video_path: str, output_dir: str):
             continue
 
         crop = frame[y1:y2, x1:x2]
-        output_path = os.path.join(output_dir, f"{ix}_{key}.jpg")
+        output_filename = f"{base_json_filename}_{timestamp_str}_{index}.jpg"
+        output_path = os.path.join(output_dir, output_filename)
         cv2.imwrite(output_path, crop)
         print(f"Saved: {output_path}")
-        ix += 1
 
     cap.release()
