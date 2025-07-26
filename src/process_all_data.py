@@ -63,7 +63,3 @@ def process_all_videos():
                 print(f"[OK] Processed: {corresponding_mp4_name}")
             except Exception as e:
                 print(f"[ERROR] {corresponding_mp4_name}: {e}")
-
-
-if __name__ == "__main__":
-    process_all_videos()
