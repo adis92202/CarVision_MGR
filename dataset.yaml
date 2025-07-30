@@ -1,0 +1,5 @@
+train: C:\Users\adamp\OneDrive\Pulpit\MGR\Master\CarVision_MGR\data\dataset\images\train
+val: C:\Users\adamp\OneDrive\Pulpit\MGR\Master\CarVision_MGR\data\dataset\images\val
+nc: 1
+names:
+- pothole
