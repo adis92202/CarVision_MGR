@@ -7,7 +7,7 @@
 ![YOLO](https://img.shields.io/badge/Models-YOLOv5s%20%7C%20YOLOv8n-orange)
 ![Domain](https://img.shields.io/badge/Domain-ADAS%20%7C%20Computer%20Vision-green)
 
-![Dashcam image with annotations](assets/via.png)
+![Dashcam image with annotations](via.png)
 
 ## Why this project
 
